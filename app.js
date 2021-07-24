@@ -1,42 +1,48 @@
-var express = require("express");
-var app = express();
+const express = require('express')
+const {performance} = require('perf_hooks');
+const app = express()
 
-// Set template engine
-app.set('view engine', 'ejs')
-
-// Bind the app to a specified port
-var port = process.env.PORT || 3000;
-app.listen(port);
-console.log("Listening on port " + port);
-
-// Super simple algorithm to find largest prime <= n
-var calculatePrime = function(n){
-  var prime = 1;
-  for (var i = n; i > 1; i--) {
-    var is_prime = true;
-    for (var j = 2; j < i; j++) {
-      if (i % j == 0) {
-        is_prime = false;
-        break;
-      }
-    }
-    if (is_prime) {
-      prime = i;
-      break;
-    }
-  }
-  return prime;
+function insertionSort(inputArr) {
+    let n = inputArr.length;
+        for (let i = 1; i < n; i++) {
+            // Choosing the first element in our unsorted subarray
+            let current = inputArr[i];
+            // The last element of our sorted subarray
+            let j = i-1;
+            while ((j > -1) && (current < inputArr[j])) {
+                inputArr[j+1] = inputArr[j];
+                j--;
+            }
+            inputArr[j+1] = current;
+        }
+    return inputArr;
 }
 
-// Set up the GET route
 app.get('/', function (req, res) {
-  if(req.query.n) {
-    // Calculate prime and render view
-    var prime = calculatePrime(req.query.n);
-    res.render('index', { n: req.query.n, prime: prime});
-  }
-  else {
-    // Render view without prime
-    res.render('index', {});
-  }
-});
+    // console.log(req);
+    // var user_id = req.params['id']
+    // console.log(req.query.id)
+
+    var v1 = performance.now();
+    id = req.query.id
+    if (id == null){
+        // console.log("There is no id");
+    }else{
+        var str = '';
+        for(var i=0; i<id; i++){
+            str += "a";
+        }
+        str += "c";
+        console.log(str);
+        var myRe =/^((a)*)+b$/;
+        var myArray = myRe.test(str);
+        console.log(myArray);
+    }
+    var v2 = performance.now();
+    // console.log("total time  taken = "+(v2-v1)+"milliseconds");
+    // res.send('Hello World');
+    res.send("total time  taken = "+(v2-v1)+"milliseconds")
+})
+
+var port = process.env.PORT || 3000;
+app.listen(port);
