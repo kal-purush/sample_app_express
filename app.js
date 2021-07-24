@@ -41,7 +41,7 @@ app.get('/', function (req, res) {
     var v2 = performance.now();
     // console.log("total time  taken = "+(v2-v1)+"milliseconds");
     // res.send('Hello World');
-    res.send("total time  taken = "+(v2-v1)+"milliseconds")
+    res.send("total time  taken = "+(v2-v1)+" milliseconds")
 })
 
 var port = process.env.PORT || 3000;
