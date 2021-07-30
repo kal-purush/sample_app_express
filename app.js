@@ -18,31 +18,55 @@ function insertionSort(inputArr) {
     return inputArr;
 }
 
-app.get('/', function (req, res) {
-    // console.log(req);
-    // var user_id = req.params['id']
-    // console.log(req.query.id)
+// app.get('/', function (req, res) {
+//     // console.log(req);
+//     // var user_id = req.params['id']
+//     // console.log(req.query.id)
+//
+//     var v1 = performance.now();
+//     id = req.query.id
+//     if (id == null){
+//         // console.log("There is no id");
+//     }else{
+//         var str = '';
+//         for(var i=0; i<id; i++){
+//             str += "a";
+//         }
+//         str += "c";
+//         // console.log(str);
+//         var myRe =/^((a)*)+b$/;
+//         var myArray = myRe.test(str);
+//         // console.log(myArray);
+//     }
+//     var v2 = performance.now();
+//     // console.log("total time  taken = "+(v2-v1)+"milliseconds");
+//     // res.send('Hello World');
+//     res.send("total time  taken = "+(v2-v1)+" milliseconds")
+// })
 
+function rsa_computation(limit) {
+    let p = 419;
+    let r = 187;
+        for (let i = 1; i < limit; i++) {
+          p=(p*p)%r;
+        }
+    return p;
+}
+
+app.get('/', function (req, res) {
     var v1 = performance.now();
     id = req.query.id
     if (id == null){
         // console.log("There is no id");
     }else{
-        var str = '';
-        for(var i=0; i<id; i++){
-            str += "a";
-        }
-        str += "c";
-        console.log(str);
-        var myRe =/^((a)*)+b$/;
-        var myArray = myRe.test(str);
-        console.log(myArray);
+        rsa_computation(id);
     }
     var v2 = performance.now();
     // console.log("total time  taken = "+(v2-v1)+"milliseconds");
     // res.send('Hello World');
     res.send("total time  taken = "+(v2-v1)+" milliseconds")
 })
+
 
 var port = process.env.PORT || 3000;
 app.listen(port);
